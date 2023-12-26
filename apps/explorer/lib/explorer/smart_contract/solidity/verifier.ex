@@ -417,7 +417,7 @@ defmodule Explorer.SmartContract.Solidity.Verifier do
       if has_constructor_with_params?, do: parse_constructor_and_return_check_function(abi), else: fn _ -> false end
 
     empty_constructor_arguments = arguments_data == "" or arguments_data == nil
-    IO.inspect(empty_constructor_arguments, label: "Empty Constructor Arguments")
+    IO.inspect(empty_constructor_arguments, label: "Epty Constructor Arguments")
 
 
     cond do
