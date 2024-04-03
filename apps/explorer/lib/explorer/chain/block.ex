@@ -129,6 +129,7 @@ defmodule Explorer.Chain.Block do
     field(:number, :integer)
     field(:size, :integer)
     field(:timestamp, :utc_datetime_usec)
+    field(:total_difficulty, :decimal)
     field(:refetch_needed, :boolean)
     field(:base_fee_per_gas, Wei)
     field(:is_empty, :boolean)

@@ -64,7 +64,7 @@ defmodule EthereumJSONRPC.Block do
           size: non_neg_integer(),
           state_root: EthereumJSONRPC.hash(),
           timestamp: DateTime.t(),
-#          total_difficulty: non_neg_integer(),
+          total_difficulty: non_neg_integer(),
           transactions_root: EthereumJSONRPC.hash(),
           uncles: [EthereumJSONRPC.hash()],
           base_fee_per_gas: non_neg_integer(),
@@ -314,7 +314,6 @@ defmodule EthereumJSONRPC.Block do
            "size" => size,
            "stateRoot" => state_root,
            "timestamp" => timestamp,
-           "totalDifficulty" => total_difficulty,
            "transactionsRoot" => transactions_root,
            "uncles" => uncles
          } = elixir
@@ -385,6 +384,52 @@ defmodule EthereumJSONRPC.Block do
       uncles: uncles,
       withdrawals_root:
         Map.get(elixir, "withdrawalsRoot", "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421")
+    }
+  end
+
+  defp do_elixir_to_params(
+    %{
+      "difficulty" => difficulty,
+      "extraData" => extra_data,
+      "gasLimit" => gas_limit,
+      "gasUsed" => gas_used,
+      "hash" => hash,
+      # include additional key here "location"
+      "location" => location,
+      "miner" => miner_hash,
+      "number" => number,
+      "parentHash" => parent_hash,
+      "receiptsRoot" => receipts_root,
+      "sha3Uncles" => sha3_uncles,
+      "size" => size,
+      "stateRoot" => state_root,
+      "timestamp" => timestamp,
+      "transactionsRoot" => transactions_root,
+      "uncles" => uncles
+    } = elixir
+  ) do
+  %{
+    difficulty: difficulty,
+    extra_data: extra_data,
+    gas_limit: gas_limit,
+    gas_used: gas_used,
+    hash: hash,
+    # include it in the map here too
+    location: location,
+    miner_hash: miner_hash,
+    mix_hash: Map.get(elixir, "mixHash", "0x0"),
+    nonce: Map.get(elixir, "nonce", 0),
+    number: number,
+    parent_hash: parent_hash,
+    receipts_root: receipts_root,
+    sha3_uncles: sha3_uncles,
+    size: size,
+    state_root: state_root,
+    timestamp: timestamp,
+    transactions_root: transactions_root,
+    uncles: uncles,
+    withdrawals_root:
+      Map.get(elixir, "withdrawalsRoot", "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421")
     }
   end
 

@@ -9,7 +9,7 @@ defmodule Explorer.SortingHelper do
   specifies name of a key in paging_options and arbitrary dynamic that will be used in ordering and pagination,
   third entry specifies own column name to order by and paginate.
   """
-  require Explorer.SortingHelper
+  # require Explorer.SortingHelper
 
   alias Explorer.PagingOptions
 

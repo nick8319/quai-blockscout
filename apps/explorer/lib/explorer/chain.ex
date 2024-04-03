@@ -51,11 +51,8 @@ defmodule Explorer.Chain do
     CurrencyHelper,
     Data,
     DecompiledSmartContract,
-<<<<<<< HEAD
     ExternalTransaction,
-=======
     DenormalizationHelper,
->>>>>>> ce735c12945c56d6bf4dcf6d2964e36797492afb
     Hash,
     Import,
     InternalTransaction,
@@ -1514,7 +1511,6 @@ defmodule Explorer.Chain do
     end
   end
 
-<<<<<<< HEAD
   @doc """
   Converts `t:Explorer.Chain.ExternalTransaction.t/0` `hash` to the `t:Explorer.Chain.ExternalTransaction.t/0` with that `hash`.
 
@@ -1568,9 +1564,6 @@ defmodule Explorer.Chain do
 
 
   # preload_to_detect_tt?: we don't need to preload more than one token transfer in case the tx inside the list (we dont't show any token transfers on tx tile in new UI)
-=======
-  # preload_to_detect_tt?: we don't need to preload more than one token transfer in case the tx inside the list (we don't show any token transfers on tx tile in new UI)
->>>>>>> ce735c12945c56d6bf4dcf6d2964e36797492afb
   def preload_token_transfers(
         %Transaction{hash: tx_hash, block_hash: block_hash} = transaction,
         necessity_by_association,
@@ -3408,6 +3401,12 @@ defmodule Explorer.Chain do
 
   defp fetch_transactions_in_descending_order_by_block_and_index(paging_options) do
     Transaction
+    |> order_by([transaction], desc: transaction.block_number, asc: transaction.index)
+    |> handle_block_paging_options(paging_options)
+  end
+
+  defp fetch_external_transactions_in_ascending_order_by_index(paging_options) do
+    ExternalTransaction
     |> order_by([transaction], desc: transaction.block_number, asc: transaction.index)
     |> handle_block_paging_options(paging_options)
   end
